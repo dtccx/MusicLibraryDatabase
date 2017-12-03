@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div class="information_list">
+        <h1>
+            Songs
+        </h1>
+
+        <hr>
+
+        {% if songs %}
+            {% for song in songs %}
+                {% include "songs/_song_thumbnail.html" %}
+            {% endfor %}    
+        {% else %}
+            <p>No songs found.</p>                
+        {% endif %}
+
+        <hr>
+
+        <div class="input_form">
+            <a href="{% url 'songs:song_new' %}" class="btn btn-primary btn-block">
+                Add a new song.
+            </a>
+        </div>
+
+    </div>
+
+{% endblock content %}  
+
+
+
+
+
+
+
+
+
+
+
+

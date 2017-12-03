@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div class = "information_list">
+        <h1>
+            Artists
+        </h1>
+       
+        <hr>
+
+        {% if artists %}
+            {% for artist in artists %}
+                {% include "artists/_artist_thumbnail.html" %}
+            {% endfor %}
+        {% else %}
+            <p>No artists found.</p>
+        {% endif %}
+      
+        <hr>
+        
+        <div class="input_form">
+            <a href="{% url 'artists:artist_new' %}" class="btn btn-primary btn-block">
+                Add a new artist.
+            </a>            
+        </div>
+
+    </div>
+
+{% endblock content %}

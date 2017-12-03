@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+    <h1>
+        Music Library
+    </h1>
+
+    
+    <div class="input_form">
+        <form action="{% url 'artists:artist_list' %}">
+            <label for="index-search">
+                Search Library
+            </label>
+            <input type="text" id="index-search" class="form-control" name="q" placeholder="Find an artist.">
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>                
+    </div>    
+
+    <hr>
+    
+    <li>
+        <h2>
+            <a href="/artists">Artists</a>
+        </h2>
+    </li>
+    <li>
+        <h2>
+            <a href="/albums">Albums</a>
+        </h2>
+    </li>
+    <li>
+        <h2>
+            <a href="/songs">Songs</a>
+        </h2>
+    </li>
+
+{% endblock content %}

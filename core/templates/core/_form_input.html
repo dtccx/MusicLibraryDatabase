@@ -1,0 +1,17 @@
+<div 
+    {% if field.errors %}
+        class="form-group has-error"
+    {% else %}
+        class="form-group"
+    {% endif %}
+>  
+    {{field.label_tag}}
+    {{field}}
+
+    {% if field.errors %}
+        <span class="help-block">
+        {% for error in field.errors %}
+            {{error}}
+        {% endfor %}
+</div>
+{% endif %}

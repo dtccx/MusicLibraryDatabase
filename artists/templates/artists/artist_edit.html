@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    {% if artist %}
+        <h2>Edit: {{artist.name}}</h2>
+    {% else %}
+        <h2>New Artist</h2>
+    {% endif %}
+    
+    <form action="" method = "POST" class="input_form">
+        {% csrf_token %}
+  
+        {% for field in form %}
+            {% include "core/_form_input.html" %}
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary btn-block save_button">
+            Save
+        </button>
+    </form>
+
+{% endblock content %}
+
+
+
+
+

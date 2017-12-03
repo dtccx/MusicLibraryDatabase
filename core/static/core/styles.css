@@ -1,0 +1,33 @@
+body{
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.page-footer {
+    background-color: #fff;
+    width: 100%;
+}
+
+.content {
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    padding: 10px 0 20px 0;
+}
+
+.input_form {
+    width: 40%;
+    margin: auto;
+}
+.input_form button {
+    margin-top: 10px;
+}
+
+.information_list {
+    text-align: center;
+}
+
+.save_button {
+    margin-top: 10px;
+}
+

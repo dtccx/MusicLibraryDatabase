@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1>
+    Albums THIS IS DEAILS
+  </h1>
+</div>
+
+
+{% for album in albums  %}
+<div class="albums">
+<p>  <a href="{{album.get_absolute_url}}">
+              <li>{{albums.artist_name}}</a></a></li>
+            <lo>{{albums.album_name}}</li>
+            <li> {{albums.collection_or_greatest_hits}}</li>S
+              <li>{{albums.studio_or_live}}</li>
+              <li>{{albums.year_released}}</li>
+{% endfor %}</p>
+
+</div>
+{% endblock content %}

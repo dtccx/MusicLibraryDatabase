@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div class="information_list">
+        <h2>
+            <div class="pull-right">
+                <a href="{% url 'songs:song_edit' song.pk %}">
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </div>
+            Song: {{song.name}}
+        </h2>
+        
+        <hr>
+
+        <p>
+            Artist: {{song.get_artist_names}}
+        </p>
+
+        <p>
+            Length: {{song.length}}
+        </p>
+
+        <p>
+            Track Number: {{song.track_number}}
+        </p>
+
+
+
+    </div>
+{% endblock content %}  
+
+
