@@ -1,6 +1,6 @@
 # music
 
-Music library and embedding video.  
+Music library and embedding video for database course.  
 Designed in Django.  
 
 ## Install
