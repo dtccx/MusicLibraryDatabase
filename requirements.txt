@@ -1,2 +1,3 @@
 Django==1.8.6
 django-inspect
+django-embed-video
