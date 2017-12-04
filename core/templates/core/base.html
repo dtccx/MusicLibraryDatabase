@@ -1,79 +1,78 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>
-        {% block title %}
-            Music Library
-        {% endblock title %}
+        {% block title %} {% endblock title %}
     </title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <script src="https://use.fontawesome.com/a04d9e4c1c.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'core/styles.css' %}" />
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container">
-            <div class="navbar-header">
-
-               <button 
-                    type = "button"
-                    class ="navbar-toggle collapsed"
-                    data-toggle="collapse"
-                    data-target="#header-navbar-collapse"
-                >
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>                    
-                </button>
-         
-                <a href="{% url 'core:index' %}" class="navbar-brand">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="{% url 'core:index' %}" class="navbar-brand">
                     Music Library
                 </a>
+                </div>
+                <div id="header-navbar-collapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-left">
+                        {% if user %}
+                        <li>
+                            <a href="{% url 'artists:artist_list' %}">Artists</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'album:album_list' %}">Albums</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'songs:song_list' %}">Songs</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user %}
+                        <li>
+                            <p class="navbar-text">Welcome!&nbsp;&nbsp;<span id="base_name">{{ user.myuser.nickname }}</span></p>
+                        </li>
+                        <li><a href="{% url 'core:logout' %}">Logout</a></li>
+                        <li><a href="{% url 'core:set_password' %}">Reset Password</a></li>
+                        {% else %}
+                        <li><a href="{% url 'core:signup' %}">Sign up</a></li>
+                        <li><a href="{% url 'core:login' %}">Sign in</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-          
-            <div id="header-navbar-collapse" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/artists">Artists</a>
-                    </li>
-                    <li>
-                        <a href="/albums">Albums</a>
-                    </li>
-                    <li>
-                        <a href="/songs">Songs</a>
-                    </li>
-                </ul>      
-            </div>
-
-          </div><!-- end container -->
+            <!-- end container -->
         </nav>
     </header>
-
     <div class="container">
         <div class="content">
-            {% block content %}
-
-            {% endblock %}
+            {% block content %} {% endblock %}
         </div>
     </div>
-    
-    <footer class="page-footer">
+    <footer class="footer" role="contentinfo">
         <hr>
         <div class="container">
-            &copy; Haonan Wu 2017
+            <p class="text-center">©All rights reserved</p>
+            <h5 class="text-center"> Powered by&nbsp;
+                <a href="https://github.com/Mr-Phoebe">HaonanWu</a>
+            </h5>
         </div>
     </footer>
-
-    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
+
 </html>
