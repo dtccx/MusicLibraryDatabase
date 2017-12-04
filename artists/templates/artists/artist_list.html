@@ -1,13 +1,14 @@
 {% extends "core/base.html" %}
-
+{% load staticfiles %}
+{% block title %}Artists{% endblock %}
 {% block content %}
+
     <div class = "information_list">
         <h1>
             Artists
         </h1>
        
         <hr>
-
         {% if artists %}
             {% for artist in artists %}
                 {% include "artists/_artist_thumbnail.html" %}
@@ -15,7 +16,6 @@
         {% else %}
             <p>No artists found.</p>
         {% endif %}
-      
         <hr>
         
         <div class="input_form">
