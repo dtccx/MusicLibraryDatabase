@@ -6,15 +6,13 @@ from . models import Song
 
 class SongAdmin (admin.ModelAdmin):
     search_fields = [
-        "name", 
-        "track_number",  
+        "name",
     ]
 
     list_display = [
         "get_artist_names",
         "name", 
         "length",
-        "track_number",
     ]
 
 

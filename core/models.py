@@ -12,11 +12,11 @@ class MyUser(models.Model):
         return self.user.username
 
 class Like(models.Model):
-    user = models.ForeignKey('MyUser', related_name='user')
-    artists = models.ForeignKey('artists.Artist', related_name='artist')
+    user = models.ForeignKey('MyUser', related_name='like')
+    artists = models.ForeignKey('artists.Artist', related_name='like')
     timestamp = models.DateTimeField(null=True, blank=True)
 
 class Follow(models.Model):
-    fan = models.ForeignKey('MyUser', related_name='user')
-    star = models.ForeignKey('MyUser', related_name='user')
+    fan = models.ForeignKey('MyUser', related_name='fan')
+    star = models.ForeignKey('MyUser', related_name='star')
     timestamp = models.DateTimeField(null=True, blank=True)

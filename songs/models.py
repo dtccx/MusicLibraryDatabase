@@ -8,7 +8,7 @@ class Song(models.Model):
     #song length
     length = models.DurationField()
     #song track number
-    track_number = models.IntegerField()
+    track_number = models.IntegerField(null=True, default=0)
     #song artists
     artists = models.ForeignKey("artists.Artist")
 
@@ -19,8 +19,7 @@ class Song(models.Model):
         return self.name
 
     def get_artist_names(self):
-        artist_names = [artist.name for artist in self.artists.all()]
-        return ", ".join(artist_names)
+        return self.artists.name
 
     def get_absolute_url(self):
         return reverse("songs:song_detail", kwargs={"id":self.pk})
