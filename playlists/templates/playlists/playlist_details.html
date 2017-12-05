@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1>
+    playlists THIS IS DEAILS
+  </h1>
+</div>
+
+
+{% for playlist in playlists  %}
+<div class="playlists">
+<p>
+    <a href="{{playlist.get_absolute_url}}">
+              <li>{{playlists.creator.nickname}}</li>
+    </a>
+              <li>{{playlists.playlist_name}}</li>
+              <li>{{playlists.year_released}}</li>
+</p>
+{% endfor %}
+</div>
+{% endblock content %}
