@@ -6,7 +6,7 @@ Designed in Django.
 ## Install
 
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 ## Contributor
