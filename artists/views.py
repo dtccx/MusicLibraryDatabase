@@ -23,7 +23,7 @@ def artist_list(request):
         "artists": artists,
     }
     # return HttpResponse("Here be I.")
-    return render (request, "artists/index.html", context)
+    return render (request, "artists/artist_list.html", context)
 
 
 def artist_detail(request, id):
