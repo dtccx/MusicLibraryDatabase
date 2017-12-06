@@ -1,5 +1,4 @@
 *.pyc
 .DS_Store
 .idea
-migrations
 __pycache__

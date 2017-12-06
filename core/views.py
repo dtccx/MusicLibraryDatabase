@@ -105,15 +105,19 @@ def user_list(request):
 
     query = request.GET.get("q")
     if query:
-        # artists = Artist.objects.filter(name__icontains=query)
         users = users.filter(
             Q(name__icontains=query)
-            # Q(artists__in=artists)
         )
         users = users.distinct()
 
+    datas = map(
+        lambda x: {
+            "user": x,
+            "num": (lambda y: len(y) if y else 0)(x.playlist.all()),
+        },users)
+
     context = {
-        "users": users,
+        "datas": datas,
     }
     # return HttpResponse("Yup yup yup yup.")
     return render(request, "core/user_list.html", context)
@@ -121,8 +125,14 @@ def user_list(request):
 @login_required
 def user_detail(request, id):
     user = get_object_or_404(MyUser, pk=id)
+    loginuser = request.user
+    if loginuser.myuser.pk == id:
+        editable = True
+    else:
+        editable = False
     context = {
         "user": user,
+        "editable": editable,
     }
 
     return render(request, "core/user_detail.html", context)

@@ -13,9 +13,6 @@ class MyUser(models.Model):
     def __unicode__(self):
         return self.user.username
 
-    def get_user_city(self):
-        return self.ucity
-
     def get_absolute_url(self):
         return reverse("core:user_detail", kwargs={"id":self.pk})
 
