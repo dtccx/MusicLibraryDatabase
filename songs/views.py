@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from django.db.models import Count
+from django.db.models import Count, Q
 
 from .models import Song
 from artists.models import Artist

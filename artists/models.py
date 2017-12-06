@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 class Artist (models.Model):
     #artist name
     name = models.CharField(max_length = 40)
+    ArtistDescription = models.TextField()
 
     class Meta:
         ordering = ["name"]

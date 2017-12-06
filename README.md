@@ -1,12 +1,12 @@
 # music
 
-Music library and embedding video.  
+Music library and embedding video for database course.  
 Designed in Django.  
 
 ## Install
 
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 ## Contributor
