@@ -7,8 +7,6 @@ class Song(models.Model):
     name = models.CharField(max_length=100)
     #song length
     length = models.DurationField()
-    #song track number
-    track_number = models.IntegerField(null=True, default=0)
     #song artists
     artists = models.ForeignKey("artists.Artist")
 

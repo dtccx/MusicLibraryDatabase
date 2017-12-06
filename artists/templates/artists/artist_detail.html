@@ -1,24 +1,67 @@
 {% extends "core/base.html" %}
-
 {% block content %}
     <div class="information_list">
         <h2>
-            <div class="pull-right">
-                <a href="{% url 'artists:artist_edit' artist.pk %}">
-                    <i class="fa fa-pencil-square"></i>
-                </a>
-            </div>
-
             {{artist.name}}
-            
-        </h2>        
-
+        </h2>
+        <div class="row">
+            <div class="pull-right">
+                {% if state == 'like' %}
+                    <button class="btn btn-primary" type="submit" id="unlike">Unlike</button>
+                {% else %}
+                    <button class="btn btn-primary" type="submit" id="like">Like</button>
+                {% endif %}
+            </div>
+        </div>
         <hr>
         {{artist.get_song_names}}
-        
- 
-
     </div>
+    <script>
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+            else return null;
+        };
+        $(document).ready(function(){
+            $.ajaxSetup({
+            headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                    }
+                });
+            $("#like").click(function(){
+                alert('{{ artist.pk }}');
+                $.post("{% url 'core:like_artist' %}", {
+                    'artistid':{{ artist.pk }}
+                },
+                function(ret){
+                    if(ret['state'] == 1) {
+                        $.confirm({
+                            title: 'Congratuation!',
+                            content: 'Like the artist successfully!',
+                            buttons: {
+                                confirm: function () {
+                                    $.alert('Confirmed!');
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    } else {
+                        $.confirm({
+                            title: 'Sorry!',
+                            content: 'Fail to like the artist!',
+                            buttons: {
+                                confirm: function () {
+                                    $.alert('Confirmed!');
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    }
+                }
+            )
+          });
+        });
+    </script>
 {% endblock content %}      
 
 

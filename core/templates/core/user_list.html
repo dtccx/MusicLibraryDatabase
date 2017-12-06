@@ -1,25 +1,44 @@
 {% extends "core/base.html" %}
-
+{% block title %}User List{% endblock %}
 {% block content %}
-    <div class="information_list">
-        <h1>
-            Users
-        </h1>
+    <h1 class="page-header">Users</h1>
+    <table class="table table-hover">
+        {% if datas %}
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Playlists</th>
+                    <th>Detial</th>
+                    <th>Follow</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                <tr>
+                    <td>{{ data.user.nickname }}</td>
+{#                    {% if user.playlist.all %}#}
+                    <td>{{ data.num }}</td>
+{#                    {% else %}#}
+{#                    {% endif %}#}
+                    <td>
+                        <a href="{{ data.user.get_absolute_url }}">
+                        <button class="btn btn-info">Detail</button>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-success">Follow</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
 
-        <hr>
-
-        {% if users %}
-            {% for user in users %}
-                {% include "core/_user_thumbnail.html" %}
-            {% endfor %}    
         {% else %}
             <p>No users found.</p>
         {% endif %}
 
         <hr>
 
-    </div>
-
+    </table>
 {% endblock content %}  
 
 
