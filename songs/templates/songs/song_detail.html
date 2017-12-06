@@ -3,12 +3,12 @@
 {% block content %}
     <div class="information_list">
         <h2>
+            Song: {{song.name}}
             <div class="pull-right">
                 <a href="{% url 'songs:song_edit' song.pk %}">
-                    <i class="fa fa-pencil-square"></i>
+                    <i class="fa fa-pencil-square">Edit</i>
                 </a>
             </div>
-            Song: {{song.name}}
         </h2>
         
         <hr>
@@ -24,7 +24,6 @@
         <p>
             Track Number: {{song.track_number}}
         </p>
-
 
 
     </div>

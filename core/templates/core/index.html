@@ -32,7 +32,12 @@
     </li>
     <li>
         <h2>
-            <a href="/songs">Songs</a>
+            <a href="{% url 'songs:song_list' %}">Songs</a>
+        </h2>
+    </li>
+    <li>
+        <h2>
+            <a href="{% url 'core:user_list' %}">Users</a>
         </h2>
     </li>
 

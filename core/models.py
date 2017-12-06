@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from music import conf
 
 # Create your models here.
 
@@ -10,6 +12,12 @@ class MyUser(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+    def get_user_city(self):
+        return self.ucity
+
+    def get_absolute_url(self):
+        return reverse("core:user_detail", kwargs={"id":self.pk})
 
 class Like(models.Model):
     user = models.ForeignKey('MyUser', related_name='like')
