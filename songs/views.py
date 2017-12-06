@@ -28,17 +28,16 @@ def song_list(request):
 
 
 
+
 def song_detail(request, id):
     song = get_object_or_404(Song, pk=id)
-  
+
     context = {
         "song": song,
     }
 
     # return HttpResponse("song details!")
     return render(request, "songs/song_detail.html", context)
-
-
 
 
 def song_new(request):

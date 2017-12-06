@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <div class="information_list">
+        <h1>
+            Users
+        </h1>
+
+        <hr>
+
+        {% if users %}
+            {% for user in users %}
+                {% include "core/_user_thumbnail.html" %}
+            {% endfor %}    
+        {% else %}
+            <p>No users found.</p>
+        {% endif %}
+
+        <hr>
+
+    </div>
+
+{% endblock content %}  
+
+
+
+
+
+
+
+
+
+
+
+
