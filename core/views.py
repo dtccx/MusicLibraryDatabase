@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from core.models import MyUser
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count, Q
 
 
 
@@ -96,3 +97,39 @@ def set_password(request):
         'state': state,
     }
     return render(request, 'core/set_password.html', content)
+
+
+def user_list(request):
+    users = MyUser.objects.all()
+
+    query = request.GET.get("q")
+    if query:
+        # artists = Artist.objects.filter(name__icontains=query)
+        users = users.filter(
+            Q(name__icontains=query)
+            # Q(artists__in=artists)
+        )
+        users = users.distinct()
+
+    context = {
+        "users": users,
+    }
+    # return HttpResponse("Yup yup yup yup.")
+    return render(request, "core/user_list.html", context)
+
+
+def user_detail(request, id):
+    user = get_object_or_404(MyUser, pk=id)
+    context = {
+        "user": user,
+    }
+
+    return render(request, "core/user_detail.html", context)
+
+def user_follow(request, id):
+    user = get_object_or_404(MyUser, pk=id)
+    context = {
+        "user": user,
+    }
+
+    return render(request, "core/user_detail.html", context)

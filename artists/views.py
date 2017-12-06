@@ -37,27 +37,6 @@ def artist_detail(request, id):
     return render (request, "artists/artist_detail.html", context)
 
 
-def artist_new(request):
-    if request.method == "POST":
-        form = ArtistForm(request.POST)
-        if form.is_valid():
-            # artist = form.save()
-            artist = form.save(commit=False)
-            artist.save()
-            form.save_m2m()
-
-            messages.success(request, "Artist added!")
-            return redirect("artists:artist_detail", id=artist.pk)
-    else: 
-        form = ArtistForm()
-
-    context = {
-        "form":form,
-    }
-
-    return render(request, "artists/artist_edit.html", context)
-
-
 def artist_edit(request, id):
     artist = get_object_or_404(Artist, pk=id)
 
