@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^login/$', views.login, name="login"),
     url(r'^logout/$', views.logout, name="logout"),
     url(r'^set_password/$', views.set_password, name="set_password"),
-    url(r'^user_like/(?P<id>\d+)/$', views.like_artist, name="like_artist"),
+    url(r'^user_like/$', views.like_artist, name="like_artist"),
 ]

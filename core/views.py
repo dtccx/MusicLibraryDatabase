@@ -99,7 +99,7 @@ def set_password(request):
     }
     return render(request, 'core/set_password.html', content)
 
-
+@login_required
 def user_list(request):
     users = MyUser.objects.all()
 
@@ -118,7 +118,7 @@ def user_list(request):
     # return HttpResponse("Yup yup yup yup.")
     return render(request, "core/user_list.html", context)
 
-
+@login_required
 def user_detail(request, id):
     user = get_object_or_404(MyUser, pk=id)
     context = {
@@ -127,6 +127,7 @@ def user_detail(request, id):
 
     return render(request, "core/user_detail.html", context)
 
+@login_required
 def user_follow(request, id):
     user = get_object_or_404(MyUser, pk=id)
     context = {
@@ -138,15 +139,13 @@ def user_follow(request, id):
 @login_required
 def like_artist(request):
     user = request.user
-    state = None
     if request.method == 'POST':
         artistid = request.POST.get('artistid', '')
         artist = Artist.objects.get(pk=artistid)
-        like = Like(user=user, artists=artist)
-        like.save()
-        state = 'success'
-    content = {
-        'state': state,
-        'artist': artist,
-    }
-    return render(request, 'artists/artist_detail.html', content)
+        if Like.objects.filter(user=user.myuser, artist=artist):
+            return JsonResponse({'state': -1})
+        else:
+            like = Like(user=user.myuser, artist=artist)
+            like.save()
+
+    return JsonResponse({'state': 1})

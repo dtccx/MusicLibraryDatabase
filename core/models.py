@@ -6,7 +6,7 @@ from music import conf
 # Create your models here.
 
 class MyUser(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name='myuser')
     nickname = models.CharField(max_length=16)
     ucity = models.CharField(max_length=16)
 

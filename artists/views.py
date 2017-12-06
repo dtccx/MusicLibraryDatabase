@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
 from .models import Artist
+from core.models import Like
 from .forms import ArtistForm
 
 @login_required
@@ -29,9 +30,13 @@ def artist_list(request):
 @login_required
 def artist_detail(request, id):
     artist = get_object_or_404(Artist, pk=id)
+    user = request.user
+    state = 'unlike'
+    if Like.objects.filter(user=user.myuser, artist=artist):
+        state = 'like'
 
     context = {
-        "state": None,
+        "state": state,
         "artist": artist,
     }
 
