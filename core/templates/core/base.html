@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'core/styles.css' %}" />
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
 </head>
 
 <body>
@@ -39,6 +40,9 @@
                         </li>
                         <li>
                             <a href="{% url 'songs:song_list' %}">Songs</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'core:user_list' %}">Users</a>
                         </li>
                         {% endif %}
                     </ul>
