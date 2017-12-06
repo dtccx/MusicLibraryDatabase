@@ -3,21 +3,16 @@
 {% block content %}
     <div class="information_list">
         <h2>
-            <div class="pull-right">
-                <a href="{% url 'artists:artist_edit' artist.pk %}">
-                    <i class="fa fa-pencil-square"></i>
-                </a>
-            </div>
-
             {{artist.name}}
             
         </h2>        
-
+        <div class="row">
+            <div class="pull-right">
+                <button class="btn btn-default" type="submit">Button</button>
+            </div>
+        </div>
         <hr>
         {{artist.get_song_names}}
-        
- 
-
     </div>
 {% endblock content %}      
 

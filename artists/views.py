@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from .models import Artist
 from .forms import ArtistForm
 
-
+@login_required
 def artist_list(request):
 
     artists = Artist.objects.all()
@@ -25,11 +26,12 @@ def artist_list(request):
     # return HttpResponse("Here be I.")
     return render (request, "artists/artist_list.html", context)
 
-
+@login_required
 def artist_detail(request, id):
     artist = get_object_or_404(Artist, pk=id)
 
     context = {
+        "state": None,
         "artist": artist,
     }
 

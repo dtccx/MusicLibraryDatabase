@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from core.models import MyUser
+from core.models import MyUser, Like, Follow
+from artists.models import Artist
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
@@ -96,3 +97,19 @@ def set_password(request):
         'state': state,
     }
     return render(request, 'core/set_password.html', content)
+
+@login_required
+def like_artist(request):
+    user = request.user
+    state = None
+    if request.method == 'POST':
+        artistid = request.POST.get('artistid', '')
+        artist = Artist.objects.get(pk=artistid)
+        like = Like(user=user, artists=artist)
+        like.save()
+        state = 'success'
+    content = {
+        'state': state,
+        'artist': artist,
+    }
+    return render(request, 'artists/artist_detail.html', content)
