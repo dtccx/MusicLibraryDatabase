@@ -41,7 +41,7 @@ def login(request):
     }
     return render(request, 'core/login.html', content)
 
-
+@login_required
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('core:index'))
