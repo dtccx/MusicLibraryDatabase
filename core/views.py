@@ -7,8 +7,8 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
-
-
+from .forms import MyUserForm
+from django.contrib import messages
 
 def index(request):
     user = request.user if request.user.is_authenticated() else None
@@ -41,10 +41,12 @@ def login(request):
     }
     return render(request, 'core/login.html', content)
 
+
 @login_required
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('core:index'))
+
 
 def signup(request):
     if request.user.is_authenticated():
@@ -74,6 +76,7 @@ def signup(request):
     }
     return render(request, 'core/signup.html', content)
 
+
 @login_required
 def set_password(request):
     user = request.user
@@ -99,6 +102,45 @@ def set_password(request):
     }
     return render(request, 'core/set_password.html', content)
 
+
+@login_required
+def user_detail(request, id):
+    user = get_object_or_404(MyUser, pk=id)
+    loginuser = request.user
+    if loginuser.pk == user.user.pk:
+        editable = True
+    else:
+        editable = False
+    context = {
+        "user": user,
+        "editable": editable,
+    }
+
+    return render(request, "core/user_detail.html", context)
+
+
+@login_required
+def user_edit(request):
+    user = request.user.myuser
+
+    if request.method == "POST":
+        form = MyUserForm(request.POST, instance=user)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, "Profile updated!")
+            return redirect("core:user_detail", id=user.pk)
+
+    else:
+        form = MyUserForm(instance=user)
+
+    context = {
+        "form": form,
+        "user": user,
+    }
+
+    return render(request, "core/user_edit.html", context)
+
+
 @login_required
 def user_list(request):
     users = MyUser.objects.all()
@@ -122,20 +164,6 @@ def user_list(request):
     # return HttpResponse("Yup yup yup yup.")
     return render(request, "core/user_list.html", context)
 
-@login_required
-def user_detail(request, id):
-    user = get_object_or_404(MyUser, pk=id)
-    loginuser = request.user
-    if loginuser.myuser.pk == id:
-        editable = True
-    else:
-        editable = False
-    context = {
-        "user": user,
-        "editable": editable,
-    }
-
-    return render(request, "core/user_detail.html", context)
 
 @login_required
 def user_follow(request, id):
@@ -145,6 +173,7 @@ def user_follow(request, id):
     }
 
     return render(request, "core/user_detail.html", context)
+
 
 @login_required
 def like_artist(request):
