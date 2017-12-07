@@ -4,20 +4,37 @@
 {% block content %}
 
     <div class = "information_list">
-        <h1>
-            Artists
-        </h1>
-       
+        <h1 class="page-header">Artists</h1>
+        <table class="table table-hover">
         <hr>
         {% if artists %}
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Detial</th>
+                    <th>Like</th>
+                </tr>
+            </thead>
+            <tbody>
             {% for artist in artists %}
-                {% include "artists/_artist_thumbnail.html" %}
+                <tr>
+                    <td>{{artist.name}}</td>
+                    <td>
+                        <a href="{{artist.get_absolute_url }}">
+                        <button class="btn btn-info">Detail</button>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-success">Like</button>
+                    </td>
+                </tr>
             {% endfor %}
+            </tbody>
         {% else %}
             <p>No artists found.</p>
         {% endif %}
         <hr>
-
+        </table>
     </div>
 
 {% endblock content %}

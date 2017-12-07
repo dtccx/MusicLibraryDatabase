@@ -6,6 +6,15 @@
         {{user.nickname}}
     </h1>
     <div class="row">
+            <div class="pull-right">
+                {% if state == 'follow' %}
+                    <button class="btn btn-primary" type="submit" id="unfollow">Unfollow</button>
+                {% else %}
+                    <button class="btn btn-primary" type="submit" id="follow">Follow</button>
+                {% endif %}
+            </div>
+    </div>
+    <div class="row">
         {% if user.ucity %}
             <h3><span class="glyphicon glyphicon-home"> City</span><br></h3>
             <div class="col-md-4 col-md-offset-1">
@@ -32,6 +41,52 @@
             </div>
         </div>
     {% endif %}
-{% endblock content %}  
+        <script>
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+            if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+            else return null;
+        };
+        $(document).ready(function(){
+            $.ajaxSetup({
+            headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                    }
+                });
+            $("#follow").click(function(){
+                alert('{{ user.pk }}');
+                $.post("{% url 'core:follow_user' %}", {
+                    'userid':{{ user.pk }}
+                },
+                function(ret){
+                    if(ret['state'] == 1) {
+                        $.confirm({
+                            title: 'Congratuation!',
+                            content: 'Follow the user successfully!',
+                            buttons: {
+                                confirm: function () {
+                                    $.alert('Confirmed!');
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    } else {
+                        $.confirm({
+                            title: 'Sorry!',
+                            content: 'Fail to follow the user!',
+                            buttons: {
+                                confirm: function () {
+                                    $.alert('Confirmed!');
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    }
+                }
+            )
+          });
+        });
+    </script>
+{% endblock content %}
 
 

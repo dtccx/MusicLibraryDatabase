@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/user_follow/$', views.user_follow, name="user_follow"),
     url(r'^user_like/$', views.like_artist, name="like_artist"),
     url(r'^like_list/$', views.like_list, name="like_list"),
+    url(r'^follow_user/$', views.follow_user, name="follow_user"),
 ]

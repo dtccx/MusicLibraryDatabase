@@ -107,6 +107,9 @@ def set_password(request):
 def user_detail(request, id):
     user = get_object_or_404(MyUser, pk=id)
     loginuser = request.user
+    state = 'unfollow'
+    if Follow.objects.filter(star=user, fan=loginuser.myuser):
+        state = 'follow'
     if loginuser.pk == user.user.pk:
         editable = True
     else:
@@ -114,6 +117,7 @@ def user_detail(request, id):
     context = {
         "user": user,
         "editable": editable,
+        "state": state,
     }
 
     return render(request, "core/user_detail.html", context)
@@ -144,7 +148,6 @@ def user_edit(request):
 @login_required
 def user_list(request):
     users = MyUser.objects.all()
-
     query = request.GET.get("q")
     if query:
         users = users.filter(
@@ -189,15 +192,26 @@ def like_artist(request):
 
     return JsonResponse({'state': 1})
 
-
 @login_required
 def like_list(request):
     user = request.user.myuser
     likes = Like.objects.filter(user=user)
     artists = [l.artist for l in likes]
-
     context = {
         "artists": artists,
     }
-
     return render(request, "core/like_list.html", context)
+
+@login_required
+def follow_user(request):
+    userself = request.user.myuser
+    if request.method == 'POST':
+        userid = request.POST.get('userid', '')
+        user = MyUser.objects.get(pk=userid)
+        if Follow.objects.filter( fan=userself,star=user):
+            return JsonResponse({'state': -1})
+        else:
+            follow = Follow(fan=userself,star=user)
+            follow.save()
+
+    return JsonResponse({'state': 1})

@@ -2,27 +2,49 @@
 
 {% block content %}
     <div class="information_list">
-        <h1>
-            Songs
-        </h1>
-
+        <h1 class="page-header">Songs</h1>
+        <table class="table table-hover">
         <hr>
 
         {% if songs %}
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Detial</th>
+                    <th>Play</th>
+                    <th>Addlist</th>
+                </tr>
+            </thead>
+            <tbody>
             {% for song in songs %}
-                {% include "songs/_song_thumbnail.html" %}
-            {% endfor %}    
+                <tr>
+                    <td>{{song.name}}</td>
+                    <td>
+                        <a href="{{ song.get_absolute_url }}">
+                        <button class="btn btn-info">Detail</button>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-success">Play</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-success">Addlist</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
         {% else %}
             <p>No songs found.</p>                
         {% endif %}
 
         <hr>
-
+        </table>
         <div class="input_form">
             <a href="{% url 'songs:song_new' %}" class="btn btn-primary btn-block">
                 Add a new song.
             </a>
         </div>
+
 
     </div>
 
