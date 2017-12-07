@@ -11,6 +11,7 @@ class SongForm (BootstrapFormMixin, forms.ModelForm):
             "name",
             "length",
             "artists",
+            "video",
         )
 
   

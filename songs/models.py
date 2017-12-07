@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from music import conf
+from embed_video.fields import EmbedVideoField
 
 class Song(models.Model):
     #song name
@@ -9,6 +10,9 @@ class Song(models.Model):
     length = models.DurationField()
     #song artists
     artists = models.ForeignKey("artists.Artist")
+    #song url
+    video = EmbedVideoField(verbose_name='My video',
+                            help_text='This is a help text')
 
     class Meta:
         ordering = ["name"]

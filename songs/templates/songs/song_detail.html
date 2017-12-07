@@ -1,7 +1,8 @@
 {% extends "core/base.html" %}
-
+{% load embed_video_tags %}
+{% block title %}{{song.name}}{% endblock %}
 {% block content %}
-    <div class="information_list">
+    <div class="row">
         <h2>
             Song: {{song.name}}
             <div class="pull-right">
@@ -10,19 +11,29 @@
                 </a>
             </div>
         </h2>
-        
-        <hr>
-
-        <p>
-            Artist: {{song.get_artist_names}}
-        </p>
-
-        <p>
-            Length: {{song.length}}
-        </p>
-
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-offset-1">
+            <p class="lead">Artist</p>
+            <p>{{song.get_artist_names}}</p>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-md-5 col-offset-1">
+            <p class="lead">Length</p>
+            <p>{{song.length}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+            {% video song.video as my_video %}
+            {% video my_video "large" %}
+            {% endvideo %}
+        </div>
 
     </div>
+
+
 {% endblock content %}  
 
 

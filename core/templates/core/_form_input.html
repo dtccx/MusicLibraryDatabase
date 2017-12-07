@@ -4,7 +4,7 @@
     {% else %}
         class="form-group"
     {% endif %}
->  
+>
     {{field.label_tag}}
     {{field}}
 
@@ -13,5 +13,6 @@
         {% for error in field.errors %}
             {{error}}
         {% endfor %}
+        </span>
 </div>
 {% endif %}
