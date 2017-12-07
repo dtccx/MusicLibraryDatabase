@@ -188,3 +188,16 @@ def like_artist(request):
             like.save()
 
     return JsonResponse({'state': 1})
+
+
+@login_required
+def like_list(request):
+    user = request.user.myuser
+    likes = Like.objects.filter(user=user)
+    artists = [l.artist for l in likes]
+
+    context = {
+        "artists": artists,
+    }
+
+    return render(request, "core/like_list.html", context)

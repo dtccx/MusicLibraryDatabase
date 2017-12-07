@@ -65,9 +65,9 @@
                                     </button>
 
                                     <ul class="dropdown-menu">
-                                        <li><a href={{ user.myuser.get_absolute_url }}>My Profile</a></li>
+                                        <li><a href="{{ user.myuser.get_absolute_url }}">My Profile</a></li>
                                         <li><a href="#">My Follow</a></li>
-                                        <li><a href="#">My Like</a></li>
+                                        <li><a href="{% url 'core:like_list' %}">My Like</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="{% url 'core:set_password' %}">Reset Password</a></li>
                                         <li><a href="{% url 'core:logout' %}">Logout</a></li>
