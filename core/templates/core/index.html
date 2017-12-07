@@ -3,42 +3,44 @@
 {% block title %}Music Library{% endblock %}
 {% block content %}
 
-    <h1>
+    <h1 class="page-header">
         Music Library
     </h1>
 
-    
-    <div class="input_form">
-        <form action="{% url 'artists:artist_list' %}">
-            <label for="index-search">
-                Search Library
-            </label>
-            <input type="text" id="index-search" class="form-control" name="q" placeholder="Find an artist.">
-            <button type="submit" class="btn btn-primary btn-block">Submit</button>
-        </form>                
-    </div>    
+    <div class="row">
+        <div class="col-md-5 col-md-offset-4">
+            <div class="input_form">
+                <form action="{% url 'artists:artist_list' %}">
+                    <label for="index-search" style="margin-bottom: 10px;">
+                        Search Library
+                    </label>
+                    <input type="text" id="index-search" class="form-control" name="q" placeholder="Find an artist.">
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <hr>
-    
-    <li>
-        <h2>
-            <a href="/artists">Artists</a>
-        </h2>
-    </li>
-    <li>
-        <h2>
-            <a href="/albums">Albums</a>
-        </h2>
-    </li>
-    <li>
-        <h2>
-            <a href="{% url 'songs:song_list' %}">Songs</a>
-        </h2>
-    </li>
-    <li>
-        <h2>
-            <a href="{% url 'core:user_list' %}">Users</a>
-        </h2>
-    </li>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-4">
+            <ul class="list-group">
+                <li class="list-group-item">
+                        <a href="{% url 'artists:artist_list' %}">Artists</a>
+                </li>
+                <li class="list-group-item">
+                        <a href="{% url 'album:album_list' %}">Albums</a>
+                </li>
+                <li class="list-group-item">
+                        <a href="{% url 'songs:song_list' %}">Songs</a>
+                </li>
+                <li class="list-group-item">
+                        <a href="{% url 'core:user_list' %}">Users</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
 {% endblock content %}

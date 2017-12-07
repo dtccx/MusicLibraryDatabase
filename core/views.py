@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
-from core.models import MyUser
+from core.models import MyUser, Like, Follow
+from artists.models import Artist
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
@@ -40,7 +41,7 @@ def login(request):
     }
     return render(request, 'core/login.html', content)
 
-
+@login_required
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('core:index'))
@@ -98,34 +99,45 @@ def set_password(request):
     }
     return render(request, 'core/set_password.html', content)
 
-
+@login_required
 def user_list(request):
     users = MyUser.objects.all()
 
     query = request.GET.get("q")
     if query:
-        # artists = Artist.objects.filter(name__icontains=query)
         users = users.filter(
             Q(name__icontains=query)
-            # Q(artists__in=artists)
         )
         users = users.distinct()
 
+    datas = map(
+        lambda x: {
+            "user": x,
+            "num": (lambda y: len(y) if y else 0)(x.playlist.all()),
+        },users)
+
     context = {
-        "users": users,
+        "datas": datas,
     }
     # return HttpResponse("Yup yup yup yup.")
     return render(request, "core/user_list.html", context)
 
-
+@login_required
 def user_detail(request, id):
     user = get_object_or_404(MyUser, pk=id)
+    loginuser = request.user
+    if loginuser.myuser.pk == id:
+        editable = True
+    else:
+        editable = False
     context = {
         "user": user,
+        "editable": editable,
     }
 
     return render(request, "core/user_detail.html", context)
 
+@login_required
 def user_follow(request, id):
     user = get_object_or_404(MyUser, pk=id)
     context = {
@@ -133,3 +145,17 @@ def user_follow(request, id):
     }
 
     return render(request, "core/user_detail.html", context)
+
+@login_required
+def like_artist(request):
+    user = request.user
+    if request.method == 'POST':
+        artistid = request.POST.get('artistid', '')
+        artist = Artist.objects.get(pk=artistid)
+        if Like.objects.filter(user=user.myuser, artist=artist):
+            return JsonResponse({'state': -1})
+        else:
+            like = Like(user=user.myuser, artist=artist)
+            like.save()
+
+    return JsonResponse({'state': 1})

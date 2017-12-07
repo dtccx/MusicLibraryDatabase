@@ -26,9 +26,6 @@ def song_list(request):
     # return HttpResponse("Yup yup yup yup.")
     return render(request, "songs/index.html", context)
 
-
-
-
 def song_detail(request, id):
     song = get_object_or_404(Song, pk=id)
 

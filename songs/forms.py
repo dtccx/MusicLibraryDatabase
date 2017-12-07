@@ -10,7 +10,6 @@ class SongForm (BootstrapFormMixin, forms.ModelForm):
         fields = (
             "name",
             "length",
-            "track_number",
             "artists",
         )
 
