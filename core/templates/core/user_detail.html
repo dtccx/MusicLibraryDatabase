@@ -23,6 +23,15 @@
                 </ul>
             </div>
     </div>
+    {% if editable %}
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+                <a href="{% url 'core:user_edit' %}">
+                    <button class="btn btn-primary">Edit</button>
+                </a>
+            </div>
+        </div>
+    {% endif %}
 {% endblock content %}  
 
 

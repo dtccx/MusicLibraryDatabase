@@ -1,36 +1,34 @@
 {% extends "core/base.html" %}
-{% block title %}User List{% endblock %}
+{% block title %}User Like List{% endblock %}
 {% block content %}
-    <h1 class="page-header">Users</h1>
+    <h1 class="page-header">Favorite Artists</h1>
     <table class="table table-hover">
-        {% if datas %}
+        {% if artists %}
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Playlists</th>
                     <th>Detial</th>
-                    <th>Follow</th>
+                    <th>Operation</th>
                 </tr>
             </thead>
             <tbody>
-                {% for data in datas %}
+                {% for artist in artists %}
                 <tr>
-                    <td>{{ data.user.nickname }}</td>
-                    <td>{{ data.num }}</td>
+                    <td>{{ artist.name }}</td>
                     <td>
-                        <a href="{{ data.user.get_absolute_url }}">
+                        <a href="{{ artist.get_absolute_url }}">
                         <button class="btn btn-info">Detail</button>
                         </a>
                     </td>
                     <td>
-                        <button class="btn btn-success">Follow</button>
+                        <button class="btn btn-danger">Unlike</button>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
 
         {% else %}
-            <p>No users found.</p>
+            <p>No favorite artists.</p>
         {% endif %}
 
         <hr>
