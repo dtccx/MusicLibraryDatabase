@@ -1,21 +1,3 @@
-# music
-
-Music library and embedding video for database course.  
-Designed in Django.  
-
-## Install
-
-```
-pip install -r requirements.txt
-```
-
-## Contributor
-
-Haonan Wu  
-Changxing Cao  
-
-
-# Report
 A.
 
 ![image alt text](image_0.png)
@@ -357,7 +339,4 @@ In table Follow, there are two options that we can use, 1.use type to decide the
 			
 
 		
-
-
-
 
