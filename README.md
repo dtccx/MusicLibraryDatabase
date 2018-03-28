@@ -22,9 +22,10 @@ A.
 
 B.
 
-**TABLE**
+## TABLE
 
-Users (uid, uname, uemail, ucity, ulogname, upw)
+**Users (uid, uname, uemail, ucity, ulogname, upw)**
+```
 
 Primary Key: uid
 
@@ -39,10 +40,11 @@ Ucity: The city users live in, can be null;
 Ulogname: The nick name to log in, not null;
 
 Upw: Password to log in, not null;
-
+```
  
 
-Track (tid, ttitle, tduration, tgenre, turl, aid)
+**Track (tid, ttitle, tduration, tgenre, turl, aid)**
+```
 
 Primary Key: tid
 
@@ -59,10 +61,12 @@ Tgenre: the genre of the song, not null;
 Turl: the source web url of the song, not null;
 
 Aid: the id number of Artist, not null;
+```
 
  
 
-Artists (aid, aname, adescript)
+**Artists (aid, aname, adescript)**
+```
 
 Primary Key: aid
 
@@ -71,10 +75,12 @@ Aid: the id number of Artist, not null;
 Aname: artist’s name, not null;
 
 Adescript: the description of the artist, not null;
+```
 
  
 
-Playlist (pid, ptitle, pdate, uid)
+**Playlist (pid, ptitle, pdate, uid)**
+```
 
 Primary Key: pid
 
@@ -87,10 +93,11 @@ Ptitle: the title name of playlist, not null;
 Pdate: the datetime that the playlist created, not null;
 
 Uid: users’ id number;
-
+```
  
 
-Album (alid, altitle, aldate)
+**Album (alid, altitle, aldate)**
+```
 
 Primary Key: alid
 
@@ -99,19 +106,20 @@ Alid: id number of album, not null;
 Altitle: title name of the album, not null;
 
 Aldate: the title date time that album released, not null;
-
+```
  
 
-AlbumTrack (alid, tid, aorder)
+**AlbumTrack (alid, tid, aorder)**
+```
 
 Primary Key: alid, tid
 
 Foreign key: AlbumTrack.alid references Album.alid
 
-                                	AlbumTrack.tid references Track.tid
+AlbumTrack.tid references Track.tid
 
 Aorder: the order of one track in one album, not null;
-
+```
  
 
 PlaylistTrack (pid, tid, porder)
