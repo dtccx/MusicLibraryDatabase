@@ -354,9 +354,13 @@ In table Track, we store url in this table, so when we need to play this song, w
 
 In table Follow, there are two options that we can use, 1.use type to decide the two users’ relation; 2. Use the attribute to decide who follows who. We choose 2, and when we want to see which two users follow each other, we just need to add "a.uid<b.uid" to delete repeated data.				
 
-			
 
-		
+
+## Show of the whole web: 
+
+**User Table**
+
+![image alt text](image_report/image_8.png)
 
 
 
