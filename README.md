@@ -15,14 +15,14 @@ Haonan Wu
 Changxing Cao  
 
 
-# Report
-A.
 
+
+## E-R:
 ![image alt text](image_0.png)
 
-B.
 
-## TABLE
+
+## Database Relationship Design
 
 **Users (uid, uname, uemail, ucity, ulogname, upw)**
 ```
@@ -116,14 +116,14 @@ Primary Key: alid, tid
 
 Foreign key: AlbumTrack.alid references Album.alid
 
-AlbumTrack.tid references Track.tid
+					AlbumTrack.tid references Track.tid
 
 Aorder: the order of one track in one album, not null;
 ```
  
 
-PlaylistTrack (pid, tid, porder)
-
+**PlaylistTrack (pid, tid, porder)**
+```
 Primary Key: pid, tid
 
 Foreign key: PlaylistTrack.pid references Playlist.pid
@@ -131,28 +131,28 @@ Foreign key: PlaylistTrack.pid references Playlist.pid
                      PlaylistTrack.tid references Track.tid
 
 Porder: the order of one track in one playlist, not null;
-
+```
  
 
-Likes (uid, aid, ltimestamp)
-
+**Likes (uid, aid, ltimestamp)**
+```
 Primary Key: uid, aid
 
 Foreign key: Likes.uid references Users.uid
 
-                     Likes.aid references Artists.tid
+					Likes.aid references Artists.tid
 
 Ltimestamp: the timestamp when user likes one artist
-
+```
  
 
-Rate (uid, tid, rtimestamp, score)
-
+**Rate (uid, tid, rtimestamp, score)**
+```
 Primary Key: uid, tid
 
 Foreign key: Rate.uid references Users.uid
 
-                     Rate.tid references Track.tid
+Rate.tid references Track.tid
 
 Rtimestamp: the timestamp when user rates one track song
 
@@ -169,16 +169,16 @@ Foreign key: Follow.flwerid references Users.uid
 Flwerid: the follower’s user id (A follows B, this will store A id)
 
 Flweeid: the one who is followed id (store B id)
-
+```
  
 
-Play (uid, tid, ptype, sourceid, ptimestamp)
-
+**Play (uid, tid, ptype, sourceid, ptimestamp)**
+```
 Primary Key: uid, tid, ptimestamp
 
 Foreign key: Play.uid references Users.uid
 
-                                            	Play.tid references Track.tid
+					Play.tid references Track.tid
 
 Ptype: which kind of source the track playing come from, 0--album; 1--playlist; 2--others
 
@@ -187,15 +187,15 @@ Ptype=0,1,2.  Use "check ptype<=2 and ptype>=0"
 Sourceid: the source id of the track, can be null;
 
 Ptimestamp: the timestamp when user plays a song, not null
-
-C.
+```
+## example of SQL query
 
 INSERT INTO Users(uid, uname, uemail, ucity, ulogname, upw) values('1', 'NancyInQueens', 'niq@gmail.com', 'NY', 'nancyinqueens', '123456');
 
 **Result:**
 
 ![image alt text](image_1.png)
-
+```
 SELECT art.aid, art.aname, COUNT(Track.tid)
 
 FROM Artists as art, Track
@@ -203,11 +203,12 @@ FROM Artists as art, Track
 WHERE art.aid = Track.aid
 
 GROUP BY art.aid;
-
+```
 **Result:**
 
 ![image alt text](image_2.png)
 
+```
 SELECT art.aid
 
 FROM Artists as art, Track
@@ -229,7 +230,7 @@ HAVING 2*SUM(Track.tid) >= (
     GROUP BY t.aid
 
     );
-
+```
 **Result:**
 
 ![image alt text](image_3.png)
@@ -239,7 +240,7 @@ INSERT INTO Rate(uid, tid, score, rtimestamp) values('1', '1', '5', now());
 **Result:**
 
 ![image alt text](image_4.png)
-
+```
 SELECT pl.pid, pl.ptitle, pl.uid
 
 FROM Playlist as pl, Users
@@ -257,11 +258,11 @@ AND Users.uid IN (
     AND u.uid = Follow.flweeid
 
     );
-
+```
 **Result:**
 
 ![image alt text](image_5.png)
-
+```
 SELECT Track.tid, Track.ttitle
 
 FROM Track, Artists AS art
@@ -269,11 +270,11 @@ FROM Track, Artists AS art
 WHERE Track.aid = art.aid
 
 AND (CONTAIN(Track.ttitle, "love") OR CONTAIN(art.adescript, "love"));
-
+```
 **Result:**
 
 ![image alt text](image_6.png)
-
+```
 SELECT a1.aid, a2.aid
 
 FROM Artists AS a1, Artists AS a2, Like AS l1, Like AS l2
@@ -305,12 +306,12 @@ AND 2*SUM(l1.uid) >= (
     GROUP BY a2.aid
 
     );
-
+```
 **Result:**
 
 ![image alt text](image_7.png)
 
-D. 
+## Tables Design
 
 **User Table**
 
