@@ -53,7 +53,8 @@ Playlists:			 The application relevant to Table Playlist: Playlist Creation, P
 
 **Artists:**			
 
-	 The application relevant to Table Artist: Artist List, Artist Detail 		
+
+The application relevant to Table Artist: Artist List, Artist Detail 		
 				
 **Admin:**			
 
@@ -80,7 +81,6 @@ In table Follow, there are two options that we can use, 1.use type to decide the
 
 **Users (uid, uname, uemail, ucity, ulogname, upw)**
 ```
-
 Primary Key: uid
 
 Uid: Users’ id number, auto increase, not null;
@@ -99,7 +99,6 @@ Upw: Password to log in, not null;
 
 **Track (tid, ttitle, tduration, tgenre, turl, aid)**
 ```
-
 Primary Key: tid
 
 Foreign key: Track.aid references Artists.aid
@@ -121,7 +120,6 @@ Aid: the id number of Artist, not null;
 
 **Artists (aid, aname, adescript)**
 ```
-
 Primary Key: aid
 
 Aid: the id number of Artist, not null;
@@ -135,7 +133,6 @@ Adescript: the description of the artist, not null;
 
 **Playlist (pid, ptitle, pdate, uid)**
 ```
-
 Primary Key: pid
 
 Foreign key: Playlist.uid references Users.uid
@@ -152,7 +149,6 @@ Uid: users’ id number;
 
 **Album (alid, altitle, aldate)**
 ```
-
 Primary Key: alid
 
 Alid: id number of album, not null;
@@ -165,7 +161,6 @@ Aldate: the title date time that album released, not null;
 
 **AlbumTrack (alid, tid, aorder)**
 ```
-
 Primary Key: alid, tid
 
 Foreign key: AlbumTrack.alid references Album.alid
