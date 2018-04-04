@@ -188,13 +188,9 @@ Sourceid: the source id of the track, can be null;
 
 Ptimestamp: the timestamp when user plays a song, not null
 ```
-## example of SQL query
+## Example of some SQL query
+Hope to help someone review or learn SQL, kinda forget some query's purposes, the report.pdf have the whole version, or just ignore the following : )
 
-INSERT INTO Users(uid, uname, uemail, ucity, ulogname, upw) values('1', 'NancyInQueens', 'niq@gmail.com', 'NY', 'nancyinqueens', '123456');
-
-**Result:**
-
-![image alt text](image_1.png)
 ```
 SELECT art.aid, art.aname, COUNT(Track.tid)
 
@@ -204,9 +200,6 @@ WHERE art.aid = Track.aid
 
 GROUP BY art.aid;
 ```
-**Result:**
-
-![image alt text](image_2.png)
 
 ```
 SELECT art.aid
@@ -231,15 +224,7 @@ HAVING 2*SUM(Track.tid) >= (
 
     );
 ```
-**Result:**
 
-![image alt text](image_3.png)
-
-INSERT INTO Rate(uid, tid, score, rtimestamp) values('1', '1', '5', now());
-
-**Result:**
-
-![image alt text](image_4.png)
 ```
 SELECT pl.pid, pl.ptitle, pl.uid
 
@@ -259,9 +244,7 @@ AND Users.uid IN (
 
     );
 ```
-**Result:**
 
-![image alt text](image_5.png)
 ```
 SELECT Track.tid, Track.ttitle
 
@@ -271,9 +254,7 @@ WHERE Track.aid = art.aid
 
 AND (CONTAIN(Track.ttitle, "love") OR CONTAIN(art.adescript, "love"));
 ```
-**Result:**
 
-![image alt text](image_6.png)
 ```
 SELECT a1.aid, a2.aid
 
@@ -307,9 +288,6 @@ AND 2*SUM(l1.uid) >= (
 
     );
 ```
-**Result:**
-
-![image alt text](image_7.png)
 
 ## Tables Design
 
@@ -353,7 +331,28 @@ AND 2*SUM(l1.uid) >= (
 
 ![image alt text](image_17.png)
 
-## Design description:
+## Each part How we designed:
+We design the website by Django 1.8 and python 3 with several third party library including: 			
+django-inspect		 django-embed-video		 django-bootstrap-form 		
+django-redis 		
+django-filter 				
+We design 7 web applications, music, core, songs, artists, albums, playlists, admin system. 			
+**Music:**			 The kernel application for the whole system, master application.			 This application is charge of the settings for the website, and communicate with the browsers under Web Server Gateway Interface (WSGI) standards. 			
+**Core:**			 The kernel application for user management:		 User Login, User Sign up, User profile and profile edition			 User Followed Users List, User Favorite Artists List, User Playlist List, UserUser Play Records List 		
+All user information lists: Homepage, User List, User Detail 			
+All the operations which are relevant to Table User, Like, Follow: Follow a user Like an artist			 Unfollow a user 			
+Unlike an artist 			
+**Songs:**	 The application relevant to Table Song, Rate: Song List, Song Detail, Song Play Song Rate 			
+Albums:			 The application relevant to Table Album: Album List, Album Detail 			
+Playlists:			 The application relevant to Table Playlist: Playlist Creation, Playlist List, Playlist Detail 			
+
+**Artists:**			 The application relevant to Table Artist: Artist List, Artist Detail 				
+**Admin:**			 The application about database management.				 This application enable the administrators to access the database without using SQL. They modify the database through this application. 				
+**Cache Part:**				
+In this website system, we have add some simple cache system to reduce the database I/O. We use redis as Timed-cache with expiration. It is a in-memory database system which supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs and geospatial indexes with radius queries. 
+
+
+## Some function samples description:
 
 In the table Play, we design a attribute (ptype) to show the source type of the track, if ptype equals to 0, it means that the song is played from a album, and the source id references to an album’s alid; if ptype equals to 1, it means that the song is played from playlist, and the source id references to a playlist’s pid; if ptype equals to 2, the song is played outside any playlist or album, so the source id is null. Because in different cases, the source id references to different attribute of different table, it can’t  be designed as a foreign key. And compared with using several tables to store the three kinds of sources, it will cost a little more space but easily be implemented.
 
