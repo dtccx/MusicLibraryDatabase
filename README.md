@@ -28,29 +28,34 @@ django-redis
 django-filter 				
 We design 7 web applications, music, core, songs, artists, albums, playlists, admin system. 			
 
-**Music:**			 The kernel application for the whole system, master application.			 This application is charge of the settings for the website, and communicate with the browsers under Web Server Gateway Interface (WSGI) standards. 		
+**Music:**			
+ The kernel application for the whole system, master application.			 This application is charge of the settings for the website, and communicate with the browsers under Web Server Gateway Interface (WSGI) standards. 		
 			
-**Core:**			 The kernel application for user management:			
- User Login, User Sign up, User profile and profile edition			
-			 User Followed Users List, User Favorite Artists List, User Playlist List, UserUser Play Records List 			
+**Core:**			
+ The kernel application for user management:
+
+ User Login, User Sign up, User profile and profile edition
+
+ User Followed Users List, User Favorite Artists List, User Playlist List, UserUser Play Records List 			
 
 All user information lists: Homepage, User List, User Detail 		
 			
-All the operations which are relevant to Table User, Like, Follow: Follow a user Like an artist				
- Unfollow a user 			
+All the operations which are relevant to Table User, Like, Follow: Follow a user Like an artist	;	Unfollow a user;   Unlike an artist 			
 
-Unlike an artist 			
-
-**Songs:**	 The application relevant to Table Song, Rate: Song List, Song Detail, Song Play Song Rate 			
+**Songs:**			
+ The application relevant to Table Song, Rate: Song List, Song Detail, Song Play Song Rate 			
 Albums:			 The application relevant to Table Album: Album List, Album Detail 			
 Playlists:			 The application relevant to Table Playlist: Playlist Creation, Playlist List, Playlist Detail 			
 
 
-**Artists:**			 The application relevant to Table Artist: Artist List, Artist Detail 		
+**Artists:**			
+	 The application relevant to Table Artist: Artist List, Artist Detail 		
 				
-**Admin:**			 The application about database management.				 This application enable the administrators to access the database without using SQL. They modify the database through this application. 		
+**Admin:**			
+ The application about database management.				 This application enable the administrators to access the database without using SQL. They modify the database through this application. 		
 				
 **Cache Part:**				
+
 In this website system, we have add some simple cache system to reduce the database I/O. We use redis as Timed-cache with expiration. It is a in-memory database system which supports data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs and geospatial indexes with radius queries. 
 
 
